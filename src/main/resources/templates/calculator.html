@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор</title>
+</head>
+<body>
+
+<!--/*@thymesVar id="credit" type="ru.meklaw.creditcalculator.models.Credit"*/-->
+<form th:method="POST" th:action="@{/calculator}" th:object="${credit}">
+    <label for="sum">Сумма кредита (от 100_000 до 5_000_000):</label>
+    <input type="text" th:field="*{sum}" id="sum">
+    <div style="color: red" th:if="${#fields.hasErrors('sum')}" th:errors="*{sum}">Sum error</div>
+    <br/>
+
+    <label for="date">Срок кредита в месяцах (от 12 до 60):</label>
+    <input type="text" th:field="*{date}" id="date">
+    <div style="color: red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date error</div>
+    <br/>
+
+    <label th:text="${'Процентная ставка: ' + credit.getPercent() + '%'}"></label>
+    <br/>
+
+    <input type="submit" value="Рассчитать!">
+</form>
+
+</body>
+</html>
