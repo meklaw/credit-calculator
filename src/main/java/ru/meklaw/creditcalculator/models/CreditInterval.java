@@ -10,10 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreditInterval {
-    private int month;
-    private double sumInTheBeginning;
-    private double percent;
-    private double creditPlusPercent;
-    private double annuity;
+    private int numOfPayment;
+    private String monthAndYear;
+    private double annuityMinusPercent;
+    private double percentPayment;
     private double sumInTheEnd;
+    private double annuity;
+
+    private double sumInTheBeginning;
 }

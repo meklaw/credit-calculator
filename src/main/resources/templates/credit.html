@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Кредит</title>
+</head>
+<body>
+<!--/*@thymesVar id="credit" type="ru.meklaw.creditcalculator.models.Credit"*/-->
+<p th:text="'Сумма кредита: ' + ${credit.getSum()}"></p>
+<p th:text="'Срок кредита: ' + ${credit.getDate()} + ' месяцев'"></p>
+<p th:text="'Процентная ставка: ' + ${credit.getPercent()} + '%'"></p>
+
+<table>
+    <colgroup>
+        <!-- Задаем цвет фона для следующего (одного) столбца таблицы-->
+        <col span="6" style="background-color:LightCyan">
+    </colgroup>
+    <caption>Перечень аннуитетных платежей</caption>
+    <tr>
+        <th>Номер платежа</th>
+        <th>Месяц/Год</th>
+        <th>Платёж по основному долгу</th>
+        <th>Платёж по процентам</th>
+        <th>Остаток основного долга</th>
+        <th>Общая сумма платежа</th>
+    </tr>
+
+    <!--/*@thymesVar id="intervals" type="List<ru.meklaw.creditcalculator.models.CreditInterval>"*/-->
+    <tr th:each="interval : ${intervals}">
+        <!--/*@thymesVar id="interval" type="ru.meklaw.creditcalculator.models.CreditInterval"*/-->
+        <td th:text="${interval.getNumOfPayment()}"></td>
+        <td th:text="${interval.getMonthAndYear()}"></td>
+        <td th:text="${interval.getAnnuityMinusPercent()}"></td>
+        <td th:text="${interval.getPercentPayment()}"></td>
+        <td th:text="${interval.getSumInTheEnd()}"></td>
+        <td th:text="${interval.getAnnuity()}"></td>
+    </tr>
+
+</table>
+
+<br/>
+<a href="/calculator">К кредитному калькулятору</a>
+
+</body>
+</html>
